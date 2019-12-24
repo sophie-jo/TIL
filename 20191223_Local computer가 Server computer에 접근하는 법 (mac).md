@@ -63,19 +63,19 @@ SSH의 자동 로그인 기능을 통해서 편리하게 git 사용하기
 
 # Details  
 5.두 개의 파일 생성됨  
-	5.1 id_rsa  
-		private key(비밀번호)  
-		Local computer에 저장  
-	5.2 id_rsa.pub  
-		public key(공개된 정보)  
-		Server computer에 저장  
-	부연설명  
-		5.2를 Copy해서 Server computer에 접속  
-		5.1를 만들 때 5.2가 같이 생성  
-		Server computer에 접속할 때 비밀번호 입력하지 않고 자동으로 두 개의 Computer 사이에 여러 복잡한 절차가 일어남  
-		결국 안전하게 Local computer가 Server computer에 자동로그인  
-	image  
-<img src=“/img/local_and_server_computers.png” title=“Relationship btw id_rsa and id_rsa.pb”></img>  
+	1. id_rsa  
+	private key(비밀번호)  
+	Local computer에 저장  
+	2. id_rsa.pub  
+	public key(공개된 정보)  
+	Server computer에 저장  
+	3. 부연설명  
+	5.2를 Copy해서 Server computer에 접속  
+	5.1를 만들 때 5.2가 같이 생성  
+	Server computer에 접속할 때 비밀번호 입력하지 않고 자동으로 두 개의 Computer 사이에 여러 복잡한 절차가 일어남  
+	결국 안전하게 Local computer가 Server computer에 자동로그인  
+	4. image
+	![Relationship btw id_rsa and id_rsa.pb](local_and_server_computers.png)
 6. cat id_rsa.pub  
 	cat : 파일 내용 화면에 출력  
 9. SSH and  GPG keys  
