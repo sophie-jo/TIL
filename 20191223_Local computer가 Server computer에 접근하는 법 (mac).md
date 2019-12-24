@@ -6,24 +6,24 @@ SSH의 자동 로그인 기능을 통해서 편리하게 git 사용하기
 
 ***
 
-#Contents
+# Contents
 1. Preknowledge
 2. Overall process
 3. Details
 
 ***
 
-#Preknowledge
-* Local computer
+# Preknowledge
+* Local computer  
 내 맥북
-* Server computer
+* Server computer  
 깃허브  
 원격 저장소
-* 깃허브?통신방식
+* 깃허브?통신방식  
 	- ssh : 매번 로그인 안해도 됨
 	- https
 
-#Overall process
+# Overall process
 1. Open terminal
 2. ssh-keygen 입력
 	1. Output : 경로 
@@ -60,24 +60,26 @@ SSH의 자동 로그인 기능을 통해서 편리하게 git 사용하기
 
 
 
-#Details  
-##5.두 개의 파일 생성됨  
-###5.1 id_rsa  
+# Details  
+## 5.두 개의 파일 생성됨  
+### 5.1 id_rsa  
 private key(비밀번호)  
 Local computer에 저장  
-###5.2 id_rsa.pub  
+### 5.2 id_rsa.pub  
 public key(공개된 정보)  
 Server computer에 저장  
-###부연설명  
+### 부연설명  
 5.2를 Copy해서 Server computer에 접속  
 5.1를 만들 때 5.2가 같이 생성  
 Server computer에 접속할 때 비밀번호 입력하지 않고 자동으로 두 개의 Computer 사이에 여러 복잡한 절차가 일어남  
 결국 안전하게 Local computer가 Server computer에 자동로그인  
-###image  
-<img src=“/img/local_and_server_computers.png” title=“Relationship btw id_rsa and id_rsa.pb”></img>  
-##6. cat id_rsa.pub  
+### image  
+//![](/img/local_and_server_computers.png)
+![Relationship btw id_rsa and id_rsa.pb](/img/local_and_server_computers.png)
+//<img src=“/img/local_and_server_computers.png” title=“Relationship btw id_rsa and id_rsa.pb”></img>  
+## 6. cat id_rsa.pub  
 cat : 파일 내용 화면에 출력  
-##9. SSH and  GPG keys  
+## 9. SSH and  GPG keys  
 여기서 github에 내 공개키를 저장  
 
 ***
