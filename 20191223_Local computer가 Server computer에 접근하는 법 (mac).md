@@ -41,9 +41,9 @@ SSH의 자동 로그인 기능을 통해서 편리하게 git 사용하기
 9. SSH and  GPG keys 
 	1. New SSH key
 		1. Title
-		>Local computer 이름 설정
+		Local computer 이름 설정
 		2. Key
-		>6.1 Paste
+		6.1를 Paste
 	2. Add SSH key
 10. 확인
 	1. 새 repo 생성
@@ -56,7 +56,7 @@ SSH의 자동 로그인 기능을 통해서 편리하게 git 사용하기
 	8. git add 10.7.txt
 	9. git commit -m blahblah
 	10. git push
-	>잘 되면 성공한거
+	잘 되면 성공한거
 	
 
 
@@ -64,25 +64,25 @@ SSH의 자동 로그인 기능을 통해서 편리하게 git 사용하기
 #Details
 ##5.두 개의 파일 생성됨
 ###5.1 id_rsa
->private key(비밀번호)
->>Local computer에 저장
+private key(비밀번호)
+Local computer에 저장
 ###5.2 id_rsa.pub
->public key(공개된 정보)
->>Server computer에 저장
+public key(공개된 정보)
+Server computer에 저장
 ###부연설명
->5.2를 Copy해서 Server computer에 접속
->>5.1를 만들 때 5.2가 같이 생성
->>>Server computer에 접속할 때 비밀번호 입력하지 않고 자동으로 두 개의 Computer 사이에 여러 복잡한 절차가 일어남
->>>>결국 안전하게 Local computer가 Server computer에 자동로그인
+5.2를 Copy해서 Server computer에 접속
+5.1를 만들 때 5.2가 같이 생성
+Server computer에 접속할 때 비밀번호 입력하지 않고 자동으로 두 개의 Computer 사이에 여러 복잡한 절차가 일어남
+결국 안전하게 Local computer가 Server computer에 자동로그인
 ###image
 <img src=“/img/local_and_server_computers.png” title=“Relationship btw id_rsa and id_rsa.pb”></img>
 ##6. cat id_rsa.pub
->cat : 파일 내용 화면에 출력
+cat : 파일 내용 화면에 출력
 ##9. SSH and  GPG keys 
->여기서 github에 내 공개키를 저장
+여기서 github에 내 공개키를 저장
 
 ***
 
 #References
->https://www.youtube.com/watch?v=78rykXw9_0g
+https://www.youtube.com/watch?v=78rykXw9_0g
 
