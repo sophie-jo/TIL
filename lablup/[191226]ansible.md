@@ -4,12 +4,12 @@ Ansible
 =========
 
 # Contents
-1. Ansible이란?
+1. Ansible?
 2. 장점
 3. 한계
 
 
-# Ansible이란?
+# Ansible?
 1. 테스트 환경을 구축하는데 사용되는 툴
 2. Provision & configuration management tool
 
