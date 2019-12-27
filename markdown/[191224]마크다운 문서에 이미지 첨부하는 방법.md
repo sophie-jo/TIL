@@ -1,0 +1,40 @@
+마크다운 문서에 이미지 첨부하는 방법
+=========
+
+TIL에 이미지 첨부하기
+---------
+
+# Contents  
+1. Problem
+2. Cause
+3. Solution
+4. References
+
+
+# Problem
+* TIL-20191224-"Local computer가 Server computer에 접근하는 법.md" 문서에 이미지가 첨부되지 않음
+    * 처음엔 HTML코드로 잘못 작성함
+    * 다음에 여러 실수를 반복하다가 ![Alt text](경로) 문법으로 작성했는데
+    * 그래도 alt text만 뜸
+
+# Cause
+* 깃허브에 이미지를 저장하는 img repo를 만들어서 그 경로를 첨부했기 때문
+
+# Solution
+1. 야매(?)
+    1. img repo의 이미지의 다운로드 링크를 복사
+    2. ![Alt text](경로) : 경로부분에 링크 붙여넣기
+2. 실제 적용
+    1. TIL폴더를 분야-날짜 로 개편함
+    2. 같은 폴더에 마크다운 파일과 이미지를 같이 넣음
+    3. [Alt text](경로) : 경로부분에 이미지 파일명 넣음
+
+# References
+1. Solution-1
+    1. 준기님
+2. Solution-2
+    1. 준기님
+    1. https://heropy.blog/2017/09/30/markdown/
+
+
+
