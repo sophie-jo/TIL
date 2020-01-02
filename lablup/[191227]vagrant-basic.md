@@ -34,11 +34,6 @@ vagrant-basic
         * virtual box를 통하여 provisioning
         * 가상머신 간편하게 생성, 관리 가능
 
-# Cause
-
-# Solution
-
-# Further
 
 # References
 1. preknowledge
@@ -46,3 +41,6 @@ https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EB%B9%84%EC%A0%80%EB%8B%9D
 2. Vagrant  
 [Vagrant 설치 및 기초 사용방법]
 https://ossian.tistory.com/86
+3. Vagrant command line
+https://www.vagrantup.com/docs/cli/box.html
+
