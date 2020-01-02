@@ -32,7 +32,7 @@ vagrant up 하면 세 개의 서버가 한꺼번에 설치되지 않고 하나�
 해결 안됨
 
 # Reference  
-1. delete vagrant box
+1. delete vagrant box . 
 https://laracasts.com/discuss/channels/general-discussion/delete-vagrant-box?page=1
-2. command line for vagrant box
+2. command line for vagrant box . 
 https://www.vagrantup.com/docs/cli/box.html
