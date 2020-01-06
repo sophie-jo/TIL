@@ -41,7 +41,12 @@ python 3.8.0 설치(pyenv)
 7. backend.ai-console-server 설치
 > https://github.com/lablup/backend.ai-console-server
 
-8. 사용   
+8. 사용
+* console-server/ 디렉토리 접속
+    * 이 디렉토리에 pyenv로 만들어진 파이썬 가상환경이 있기 때문  
+    `venv-pycon2019-console-server`
+    * 어느 디렉토리에서나 이 가상환경을 적용하고 싶으면  
+    `pyenv global venv-pycon2019-console-server`
 * 웹 서버 open
 ```python -m ai.backend.console.server```
 * 웹 서버 주소 
