@@ -18,8 +18,9 @@ vagrant로 가상머신 만듦
 2. backend.ai 설치
     1. 저번에 pyenv로 만든 ansible1 환경이 깔린 디렉토리 접속(ansible)
     2. 앤서블로 설치
-    ```ansible-playbook -i [inventory file name]   scripts/install_backend_ai_rolebased2.yaml -K -e "operation=install"```
-     inventory file : targets1909.yaml
+    ```ansible-playbook -i [INVENTORY_FILE PATH/TO/INSTALL/ANSIBLE/File.yaml] [playbook_file_to_install] -K -e "operation=install"```
+    ```ansible-playbook -i targets1909.yaml   scripts/install_backend_ai_rolebased2.yaml -K -e "operation=install"```
+
 
 3. 가상머신 접속
 vagrant ssh magent1
