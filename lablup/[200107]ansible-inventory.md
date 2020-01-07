@@ -61,7 +61,7 @@ targets1909.yaml
     6. wsproxy(파일에 없음)
 
 # Image
-![group_manager](structure_of_servers_example.jpg
+![group_manager](structure_of_servers_example.jpg)
 
 # Further
 - etcd
