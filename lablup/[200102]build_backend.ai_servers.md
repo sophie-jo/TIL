@@ -9,7 +9,8 @@ Set up backend.ai servers
 
 # Contents  
 1. Process
-2. References
+2. image
+3. References
 
 # Process
 1. 내 맥미니에 가상서버 구축 (magent1, agent2, agent3)
@@ -29,11 +30,11 @@ vagrant ssh magent1
 * 이유 : 이 가상머신은 vagrant로 만들어졌기 때문에 vagrant만 접속가능  
 * 해결 : .ssh 의 authrozied keys에 내 public key 추가
 * 결과  
-```ssh vagrant@10.100.64.52```
+```ssh vagrant@10.100.64.50```
 맥미니에서 접속 가능
 
 5. 매니저 서버 접속 
-```ssh vagrant@10.100.64.52``` 
+```ssh vagrant@10.100.64.50``` 
 ```backend.ai run lablup/python:3.6-ubuntu18.04    -c "print('hello')"```
 
 6. client 폴더에 python 3.8.0 설치
@@ -58,6 +59,8 @@ http://10.100.64.50:8080/
 * ws proxy 설치
 * 그래서 아직 세션은 실행할 수 없음
 
+# Image
+![group_manager](structure_of_servers_macmini.jpg)
 
 
 # References
