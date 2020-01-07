@@ -32,7 +32,7 @@ targets1909.yaml
     1. ansible_blahblah : 앤서블로 설치할 때 옵션
     2. cuda : GPU 설치 여부 옵션
     3. ip-port
-        - 부가 옵션들의 ip 주소와 포트 설정
+        - 부가 옵션들의 ip 주소와 포트 설정(further : port)
         1. db
         2. etcd(further)
         3. redis(further)
@@ -66,6 +66,7 @@ targets1909.yaml
 # Further
 - etcd
 - redis
+- port
 - client
 - cpu/gpu
 - Master/slave system
