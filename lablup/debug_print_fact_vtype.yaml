@@ -1,0 +1,14 @@
+---
+- name: Test roles
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: print facts
+      debug:
+        var:
+          ansible_facts
+    - name: print virtualization type
+      debug:
+        var:
+          ansible_facts.virtualization_type
+      when: ansible_facts.virtualization_type is defined
