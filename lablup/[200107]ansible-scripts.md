@@ -8,9 +8,7 @@ yaml로 작성된 ansible 설치 playbook 파일 분석
 # Contents  
 1. Preknowledge  
 2. Structure
-3. Image
-4. Further
-5. References
+3. References
 
 # Preknowledge
 * 분석파일명
