@@ -1,0 +1,26 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+$init_script = <<-SCRIPT
+  apt update
+  apt upgrade -y
+  echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt/SKPr7ILmK576oftxA6ZYJ8cL0vDmHfExNcxRQqprcFheh7M9JKHsx0I+VCZxmowv2Z6X1JBInPBZrLBA8vTGACGFiCHPBiMv7IHkRvCTq4WP/8ZkQ+8LHouT1/noyrars19jbTaVeq0Tpadrc7caWwsQgndvXb2N9i21F4aFDgad5UVNoBA0BFTL+zZlzzZepgzw97UnA/QPKDAPfC+KwJMYRTqOyXwJ1gdaIFiWl6I10edfgIPolUxTi2xvD4DJjRBHbHTOahNnaEeVl+UwN3ptckc7uBSM+ictpd1AeTXk943MDBw+6y2WwcdZt8jgD5oW3Di4JGhjaSkCzGx sophie@Sophies-Mini.office.lablup
+SCRIPT
+
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 8192
+    v.cpus = 3
+  end
+  config.vm.define "magent1" do |magent1|
+    magent1.vm.provision "shell", inline: $init_script
+    magent1.vm.hostname = "magent1"
+    magent1.vm.network "public_network", ip: "10.100.64.50", netmask: "255.255.0.0", bridge: "en1: Wi-Fi (Wireless)"
+  end
+end
