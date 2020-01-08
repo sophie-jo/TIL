@@ -1,0 +1,103 @@
+---
+
+- name: Install Postgres
+  hosts: group_db
+  gather_facts: true
+  tasks:
+    - include_role:
+        name: reading_defaults
+        public: yes
+    - include_role:
+        name: docker
+    - include_role:
+        name: docker_compose
+    - include_tasks: "tasks/prepare_target_directory.yaml"
+      vars:
+        target_directory_to_deploy: '{{ ansible_facts.user_dir }}/halfstack'
+    - include_tasks: "tasks/prepare_target_directory.yaml"
+      vars:
+        target_directory_to_deploy: '{{ ansible_facts.user_dir }}/.data'
+    - include_role:
+        name: online_postgres
+      vars:
+        enable_restart: true
+        docker_compose_template_source: 'templates/docker/docker-compose.halfstack-prod.yml.j2'
+        docker_compose_target_file: 'docker-compose.halfstack-prod.yaml'
+        param_target_directory_to_deploy: '{{ ansible_facts.user_dir }}/halfstack'
+        one_service_name: 'backendai-halfstack-db'
+
+
+- name: Install Redis
+  hosts: group_redis
+  gather_facts: true
+  tasks:
+    - include_role:
+        name: reading_defaults
+        public: yes
+    - include_role:
+        name: docker
+    - include_role:
+        name: docker_compose
+    - include_tasks: "tasks/prepare_target_directory.yaml"
+      vars:
+        target_directory_to_deploy: '{{ ansible_facts.user_dir }}/halfstack'
+    - include_tasks: "tasks/prepare_target_directory.yaml"
+      vars:
+        target_directory_to_deploy: '{{ ansible_facts.user_dir }}/.data'
+    - include_tasks: "tasks/prepare_target_directory.yaml"
+    - include_role:
+        name: online_redis
+      vars:
+        enable_restart: true
+        docker_compose_template_source: 'templates/docker/docker-compose.halfstack-prod.yml.j2'
+        docker_compose_target_file: 'docker-compose.halfstack-prod.yaml'
+        param_target_directory_to_deploy: '{{ ansible_facts.user_dir }}/halfstack'
+        one_service_name: 'backendai-halfstack-redis'
+
+- name: Install Etcd
+  hosts: group_etcd
+  gather_facts: true
+  tasks:
+    - include_role:
+        name: reading_defaults
+        public: yes
+    - include_role:
+        name: docker
+    - include_role:
+        name: docker_compose
+    - include_tasks: "tasks/prepare_target_directory.yaml"
+      vars:
+        target_directory_to_deploy: '{{ ansible_facts.user_dir }}/halfstack'
+    - include_tasks: "tasks/prepare_target_directory.yaml"
+      vars:
+        target_directory_to_deploy: '{{ ansible_facts.user_dir }}/.data'
+    - include_tasks: "tasks/making_env_id.yaml"
+    - include_role:
+        name: online_etcd
+      vars:
+        enable_restart: true
+        docker_compose_template_source: 'templates/docker/docker-compose.halfstack-prod.yml.j2'
+        docker_compose_target_file: 'docker-compose.halfstack-prod.yaml'
+        param_target_directory_to_deploy: '{{ ansible_facts.user_dir }}/halfstack'
+        one_service_name: 'backendai-halfstack-etcd'
+
+- name: Install backend.ai manager
+  hosts: group_manager
+  gather_facts: true
+  tasks:
+    - include_role:
+        name: online_manager
+
+- name: Install backend.ai agent
+  hosts: group_agent
+  gather_facts: true
+  tasks:
+    - include_role:
+        name: online_agent
+
+- name: Install backend.ai client-py
+  hosts: group_client
+  gather_facts: true
+  tasks:
+    - include_role:
+        name: online_client_py
