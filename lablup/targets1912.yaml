@@ -1,0 +1,138 @@
+all:
+  hosts:
+    magent1:
+      ansible_host: 10.20.30.121
+      master_redis_node: true
+      master_etcd_node: true
+      master_db_node: true
+      master_manager_node: true
+      master_wsproxy_node: true
+    agent2:
+      ansible_host: 10.20.30.122
+    agent3:
+      ansible_host: 10.20.30.123
+  vars:
+    project_name: 'pycon2019'
+    ansible_user: vagrant
+    ansible_connection: ssh
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+    branch_name: '19.09'
+    # target_manager_ip: 10.20.30.41   # this value is required for agent only installation or specifying virtual IP for manager
+    cuda_accel_pkg: ~/backendai_test/cuda_accel/backend.ai_accelerator_cuda-1.3.2-py3-none-any.whl
+    #db_ip: 10.20.30.41
+    #etcd_ip: 10.20.30.41
+    #redis_ip: 10.20.30.41
+    db_port: 5432
+    redis_port: 6379
+    etcd_port: 2379
+    #db_user: lablup
+    #db_password: gogolablup@1
+    db_data_location:     '{{ target_directory_to_deploy }}/.data/backend.ai/postgres-data'
+    etcd_data_location:   '{{ target_directory_to_deploy }}/.data/backend.ai/etcd-data'
+    account_passwords:
+      admin@lablup.com:
+        lpw: 'wJalrXUt'
+        ak: 'AKIAIOSFODNN7EXAMPLE'
+        sk: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+      domain-admin@lablup.com:
+        lpw: 'cWbsM_vB'
+        ak: 'AKIAHUKCHDEZGEXAMPLE'
+        sk: 'cWbsM_vBB4CzTW7JdORRMx8SjGI3-wEXAMPLEKEY'
+      user@lablup.com:
+        lpw: 'C8qnIo29'
+        ak: 'AKIANABBDUSEREXAMPLE'
+        sk: 'C8qnIo29EZvXkPK_MXcuAakYTy4NYrxwmCEyNPlf'
+      monitor@lablup.com:
+        lpw: '7tuEwF1J'
+        ak: 'AKIANAMONITOREXAMPLE'
+        sk: '7tuEwF1J7FfK41vOM4uSSyWCUWjPBolpVwvgkSBu'
+    manager_config_etcd:
+      'config/redis/addr': '{{ redis_ip }}:{{ redis_port }}'
+      'config/docker/registry/index.docker.io': '"{{ docker_registry }}"'
+      'config/docker/registry/index.docker.io/username': '"{{ docker_registry_username }}"'
+      'volumes/_mount': '{{ ansible_facts.user_dir}}/vfroot'
+      'volumes/_default_host': 'local'
+      'volumes/_types/user':  '""'
+      'volumes/_types/group': '""'
+      'config/plugins/cuda/allocation_mode': 'fractional'
+      'config/plugins/cuda/unit_mem': 2454266880
+      'config/plugins/cuda/unit_proc': 14
+    kernels_to_install:
+      #- "lablup/ngc-tensorflow:19.02-py3"
+      #- "lablup/python-ff:19.06-py36-cuda9"
+      #- "lablup/python-pytorch:1.1-py36-cuda10"
+      #- "lablup/python-tensorflow:1.12-py36-cuda9"
+      #- "lablup/python-tensorflow:2.0-py36-cuda9"
+      - "lablup/python:3.6-ubuntu18.04"
+      #- "lablup/python-tensorflow:1.14-py36"
+      #- "lablup/python-tensorflow:1.14-py36-cuda9"
+      #- "lablup/python-tensorflow:1.13-py36-cuda9"
+      #- "lablup/python-tensorflow:1.12-py36-cuda9"
+      #- "lablup/python-tensorflow:1.11-py36-cuda9"
+      #- "lablup/ngc-digits:18.12-tensorflow"
+      #- "lablup/ngc-pytorch:18.12.1-py3"
+      #- "lablup/ngc-tensorflow:18.12-py3"
+  children:
+    group_db:
+      hosts:
+        magent1:
+      vars:
+        #skip_db: true
+    group_etcd:
+      hosts:
+        magent1:
+      vars:
+        #skip_etcd: true
+    group_redis:
+      hosts:
+        magent1:
+      vars:
+        #skip_redis: true
+    group_manager:
+      hosts:
+        magent1:
+      vars:
+        target_manager_group: 'group_manager'
+        target_db_group: 'group_db'
+        target_db_member_name: 'master_db_node'
+        target_redis_group: 'group_redis'
+        target_redis_member_name: 'master_redis_node'
+        target_etcd_group: 'group_etcd'
+        target_etcd_member_name: 'master_etcd_node'
+        #skip_manager: true
+    group_agent:
+      hosts:
+        magent1:
+        agent2:
+        agent3:
+      vars:
+        #skip_agent: true
+        target_manager_group: 'group_manager'
+        target_etcd_group: 'group_etcd'
+        target_etcd_member_name: 'master_etcd_node'
+    group_client:
+      hosts:
+        magent1:
+      vars:
+        #skip_client: true
+        # todo make this as a filter
+        api_endpoint: '{{ "group_manager" | get_ip_list_for_one_group(hostvars, groups) | get_endpoint_string_from_iplist("http", manager_service_port, "")  }}'
+    group_wsproxy:
+      hosts:
+        magent1:
+      vars:
+        wsproxy_image_file: '~/appproxy.tar.gz'
+        wsproxy_worker_ip: '{{ wsproxy_ip }}'
+        target_wsproxy_member_name: 'master_wsproxy_node'
+        target_wsproxy_group: 'group_wsproxy'
+        #skip_wsproxy: true
+    group_console_server:
+      hosts:
+        magent1:
+      vars:
+        #skip_console_server: true
+        console_server_service_port: 8080
+        console_server_wsproxy_url : '{{ "group_wsproxy" | get_ip_list_for_one_group(hostvars, groups) | get_endpoint_string_from_iplist("http", wsproxy_service_port, "")  }}'
+        console_server_api_endpoint: '{{ "group_manager" | get_ip_list_for_one_group(hostvars, groups) | get_endpoint_string_from_iplist("http", manager_service_port, "")  }}'
+        console_server_session_redis_port: '{{ redis_port }}' 
+        

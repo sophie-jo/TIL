@@ -16,7 +16,8 @@ yaml로 작성된 inventory파일 분석
 
 # Preknowledge
 1. 분석파일명
-targets1909.yaml
+    - targets1909.yaml
+    - targets1912.yaml (20.1.9 추가)
 2. 커널
 운영 체제의 핵심이 되는 컴퓨터 프로그램의 하나로, 시스템의 모든 것을 완전히 통제한다. 운영 체제의 다른 부분 및 응용 프로그램 수행에 필요한 여러 가지 서비스를 제공한다.
 
@@ -55,10 +56,10 @@ targets1909.yaml
         - GUI 없이 커맨드로 명령할 수 있게 하는 기능
         - 여기서 **backend.ai**를 쓸 수 있게 하는걸 클라이언트라함
         `$ backend.ai run python -c "print("a")"`
-    5. console-server(파일에 없음)
+    5. console-server(targets1912.yaml)
         - 웹을 이용할 수 있게 하는 서비스
         - 포트 : 8080
-    6. wsproxy(파일에 없음)
+    6. wsproxy(targets1912.yaml)
 
 # Image
 ![group_manager](structure_of_servers_ex.png)
