@@ -1,6 +1,6 @@
 
 
-Ansible test
+Ansible test_manually
 =========
 
 백엔드.ai가 잘 설치 되었는지 확인하기 위해 텐서플로우 실행해보기

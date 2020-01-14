@@ -1,6 +1,6 @@
 
 
-Ansible test2
+Automated Ansible test 
 =========
 
 Ansible test1을 자동화하기
