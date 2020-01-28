@@ -26,7 +26,10 @@ AWS EC2 가상머신에 backend.ai client 설치하고 세션 생성 및 텐서�
     `aws ec2 run-instances --image-id ami-025376d8670c1a73f --instance-type t2.micro`
 4. 인스턴스 시작
     `aws ec2 start-instances --instance-ids i-03bf26e510547a159`
-
+5. key pair 생성
+    `aws ec2 create-key-pair --key-name sophie1 --query 'KeyMaterial' --output text > sophie1.pem`
+6. 서버 접속
+    `bai-cloud ssh-instance dev1`
 
 # Detatils
 1. 3 인스턴스 생성 커맨드라인 옵션
@@ -34,11 +37,13 @@ AWS EC2 가상머신에 backend.ai client 설치하고 세션 생성 및 텐서�
     `aws ec2 describe-images`에서 찾음
  * instance-type 
     t2.micro (프리티어)
- * 
+ 
     
 # Problem and solution
 1. 인스턴스 시작 후 서버에 접속하고 싶은데 ssh로는 안됨
+ 키페어 생성
 
  
 # References
 1. jg kim
+2. aws_ssm_agent
