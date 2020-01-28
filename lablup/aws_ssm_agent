@@ -1,0 +1,102 @@
+[Yesterday 4:50 PM] Joongi Kim
+    Suhyeon Jo
+
+
+AWS Systems Manager provides a feature named "Session Manager".
+
+Its origination is batch-oriented command execution and result queries, but now it is extended to support real-time shell sessions streamed via AWS APIs.
+
+The advantage is that we can restrict the access using IAM policies and store the session interaction logs to S3 or CloudWatch streams.
+
+
+
+At the time of writing (2018 Dec.), it requires two components: AWS CLI and session-manager-plugin.
+
+
+
+SSM Agent Session (mandatory)
+
+
+
+0) First you need to have an IAM account and API keypair associated with it.
+
+
+
+1) Install AWS CLI on your platform. On macOS, you may use homebrew. Or you may just create a Python virtualenv and install awscli via pip.
+
+
+
+2) Run "aws --profile lablup configure" and set your IAM keypairs with the region "ap-northeast-2".
+
+
+
+3) Git clone "https://github.com/lablup/backend.ai-cloud-scripts" and install it using "pip install -e ." in a Python virtualenv (where aws cli is available).
+
+
+
+4) Run "bai-cloud --help" command to see available commands.
+
+
+
+5) Visit https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html 
+and follow instructions to install session-manager-plugin.
+
+Sometimes the session manager plugins is updated silently.
+
+Check the version by "session-manager-plugin --version" command and compare with the latest version specified the linked webpage.
+
+
+
+6) Now you can use "bai-cloud ssh-instance" command to open a shell session to EC2 instances.
+
+
+
+Native SSH/SCP access (optional)
+
+
+
+NOTE: AWS updated SSM and session-manager-plugin on July 2019 to support native SSH tunneling.
+
+
+
+0) First, grab "devops.pem" from our shared file repository and put it to your ~/.ssh directory.
+Also, update your session-manager-plugin and the SSM agent in the target servers.
+
+
+
+1) Add the following setting to your ~/.ssh/config
+
+
+
+host i-* mi-*
+
+  User devops
+
+  IdentityFile ~/.ssh/devops.pem
+
+  ProxyCommand sh -c "aws --profile lablup ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'"
+
+
+
+2) Then you can do:
+
+
+
+ssh $(bai-cloud get-instance <instanceTagName>)
+
+scp somefile $(bai-cloud get-instance <instanceTagName>):remotepath
+
+
+
+Sometimes, the official snap repository falls behind the latest release, thus downgrading of the agent happens a few times per day due to snap's auto refresh.
+
+Try this to keep a more recent version:
+
+
+
+sudo snap switch --channel=candidate amazon-ssm-agent
+
+sudo snap refresh amazon-ssm-agent
+
+
+(1 liked)<https://teams.microsoft.com/l/message/19:ceb14b2beba9415989dc84b9462e2a6d@thread.skype/1579679405167?tenantId=13c6a44d-9b52-4b9e-aa34-0513ee7131f2&amp;groupId=3a99599c-e857-4954-a217-eddba1331707&amp;parentMessageId=1579679405167&amp;teamName=Internship&amp;channelName=2019Winter&amp;createdTime=1579679405167>
