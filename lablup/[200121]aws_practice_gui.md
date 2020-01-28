@@ -1,6 +1,6 @@
 
 
-AWS practice
+AWS practice (GUI)
 =========
 
 AWS EC2 가상머신에 backend.ai client 설치하고 세션 생성 및 텐서플로우 코드 실행     
